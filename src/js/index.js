@@ -1,5 +1,5 @@
-import { fetchBreeds, fetchCatByBreed } from "./cat-api";
-import './styles.css';
+import { fetchBreeds, fetchCatByBreed } from "./cat-api.js";
+import '../css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SlimSelect from 'slim-select'
 import 'slim-select/dist/slimselect.css';
@@ -19,12 +19,14 @@ divCatInfo.classList.add('is-hidden');
 let arrBreedsId = [];
 fetchBreeds()
 .then(data => {
-    data.forEach(element => {
-        arrBreedsId.push({text: element.name, value: element.id});
-    });
+    // data.forEach(element => {
+    //     arrBreedsId.push({text: element.name, value: element.id});
+    // });
+    selector.innerHTML = data
+    .map(item => {return `<option value = "${item.id}">${item.name}</option>`;}).join('');
     new SlimSelect({
         select: selector,
-        data: arrBreedsId
+        // data: arrBreedsId
     });
     })
 .catch(onFetchError);
